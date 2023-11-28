@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>photo puzzle</title>
+
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <h1>photo puzzle</h1>
+    <h2>do you remember that one puzzle on the old macOS launchpad with the image and the tiles that you could slide? i liked that</h2>
+    <div class="puzzle-wrapper">
+      <!-- the puzzle wrapper!! -->
+      <svg class="puzzle" id="puzzle" viewBox="0 0 40 40">
+        <g class="board keep">
+          <g id="masks" class="keep">
+            <mask class="mask template keep deactivated" id="">
+              <rect class="bg" x="0" y="0" width="40" height="40" fill="black" />
+              <rect class="fg"x="0" y="0" width="10" height="10" fill="white" />
+            </mask>
+    
+          </g>
+          
+          <g class="tile template keep">
+            <g class="nuance">
+              <rect width="" height="" fill="transparent" />
+              <image class="deactivated" href="" width="" height="" mask=""/>
+            </g>
+          </g>
+        </g>
+
+      </svg>
+
+
+    
+    
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
