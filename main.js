@@ -1,8 +1,8 @@
  
 var settings = {
   "img": "assets/rainier.png",
-  "width": 10,
-  "height": 10,
+  "width": 3,
+  "height": 3,
   "gap": 1.5,
   "tile resolution": 100,
   "missing corner": 4
@@ -14,7 +14,8 @@ var tile_coords = {};
 var tile_home = {};
 var puzzle = document.querySelector("#puzzle");
 var resetting = false;
-
+var game_started = false;
+var game_ended = true;
 
 
 function get_tile(x, y) {
@@ -25,6 +26,10 @@ function get_tile(x, y) {
     }
   }
   return return_id
+}
+
+function get_random(arr) {
+  return arr[(Math.floor(Math.random() * arr.length))]
 }
 
 function build_puzzle(st) {
@@ -67,7 +72,7 @@ function build_puzzle(st) {
       tile.setAttribute("id", `tile_${tile_id}`);
       tile.querySelector("rect").setAttribute("width", st["tile resolution"]);
       tile.querySelector("rect").setAttribute("height", st["tile resolution"]);
-      tile.querySelector("rect").setAttribute("onclick", `move_tile(${tile_id})`);
+      tile.querySelector("rect").setAttribute("onmousedown", `move_tile(${tile_id})`);
       puzzle.querySelector(".board").appendChild(tile);
 
       var mask = puzzle.querySelector(".mask.template").cloneNode(true);
@@ -86,7 +91,7 @@ function build_puzzle(st) {
 
       tile_id += 1;
     }
-
+    game_ended = false;
   }
 
   // remove missing corner
@@ -123,8 +128,14 @@ function start_puzzle_update() {
     for (i in tile_coords) {
       if (i >= 0) {
         var x_coord = ( tile_coords[i]["x"] * settings["tile resolution"]) + ( tile_coords[i]["x"] * settings["gap"] );
-      var y_coord = ( tile_coords[i]["y"] * settings["tile resolution"]) + ( tile_coords[i]["y"] * settings["gap"] );
-      puzzle.querySelector(`#tile_${i}`).style = `transform: translate(${x_coord}px, ${y_coord}px);`;
+        var y_coord = ( tile_coords[i]["y"] * settings["tile resolution"]) + ( tile_coords[i]["y"] * settings["gap"] );
+        puzzle.querySelector(`#tile_${i}`).style = `transform: translate(${x_coord}px, ${y_coord}px);`;
+      }
+    }
+    if (`${tile_coords}` == `${tile_home}`) {
+      if (game_started == true && game_ended == false) {
+        alert("celebration!!");
+        game_ended = true;
       }
     }
   }, 100);
@@ -165,10 +176,30 @@ function move_tile(tile_id) {
       }, 200, tile_id);
     }
   }
+  game_started = true;
 }
 
+function mix_puzzle() {
+  var available_coords = {};
+  var coords_len = 0;
+  for (i in tile_coords) {
+    available_coords[i] = tile_coords[i];
+    coords_len += 1;
+  }
+  console.log({...available_coords});
+  for (i in tile_coords) {
+    var random = Math.floor(Math.random() * coords_len);
+    //console.log(i, random);
+    console.log({ ...available_coords});
+    tile_coords[i] = { ...available_coords[random] };
+    delete available_coords[random];
+  }
+}
+
+
+
 function reset_puzzle() {
-  var reset;
+  /*var reset;
   var reset_index = 0;
   var tiles = []
   resetting = true;
@@ -223,7 +254,9 @@ function reset_puzzle() {
     if (skip_index != true) {
       reset_index += 1;
     }
-  }, reset_speed, reset, tiles, reset_index, tile_coords, tile_home);
+  }, reset_speed, reset, tiles, reset_index, tile_coords, tile_home);*/
+
+  tile_coords = {...tile_home};
   
 }
 
