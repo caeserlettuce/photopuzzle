@@ -18,9 +18,7 @@
               <rect class="bg" x="0" y="0" width="40" height="40" fill="black" />
               <rect class="fg"x="0" y="0" width="10" height="10" fill="white" />
             </mask>
-    
           </g>
-          
           <g class="tile template keep">
             <g class="nuance">
               <rect width="" height="" fill="transparent" />
@@ -28,13 +26,44 @@
             </g>
           </g>
         </g>
-
       </svg>
-
-
-    
-    
     </div>
+    <div class="options-wrapper show">
+      <div class="options">
+        <svg viewBox="0 0 8 8" class="options-close" onclick="toggle_options()">
+          <path d="M 1 0 L 0,1 7,8 8,7"/>
+          <path d="M 7,0 L 8,1 1,8 0,7"/>
+        </svg>
+        <h1>options</h1>
+        <h2>welcome to the options</h2>
+        
+        
+          <div class="options-inputs">
+
+            <div class="item"><p class="label">image url: </p><p contenteditable type="txt" option="img" class="input"></p></div>
+            <div class="item"><p class="label">tiles (x):</p><p contenteditable type="int" option="width" class="input" min="2"></p></div>
+            <div class="item"><p class="label">tiles (y):</p><p contenteditable type="int" option="height" class="input" min="2"></p></div>
+            <div class="item"><p class="label">tile gap</p><p contenteditable type="flt" option="gap" class="input" min="0"></p></div>
+            <div class="item"><p class="label">tile resolution:</p><p contenteditable type="int" option="tile resolution" class="input" min="1"></p></div>
+            <div class="item"><p class="label">missing corner:</p><p contenteditable type="int" option="missing corner" class="input" min="1" max="4"></p></div>
+            <div class="item"><p class="label">randomize multiplier</p><p contenteditable type="flt" option="randomize amount" class="input" min="1"></p></div>
+            <div class="item"><p class="label">tick speed</p><p contenteditable type="int" option="tickspeed" class="input" min="2"></p></div>
+            <div class="item"><p class="button" onclick="update_puzzle()">update puzzle</p></div>
+            <div class="item"><p class="button" onclick="mix_puzzle()">mix puzzle</p></div>
+            <div class="item"><p class="button" onclick="reset_puzzle()">reset puzzle</p></div>
+          </div>
+        
+        
+      </div>
+      <div class="options-icon" onclick="toggle_options()">
+        <svg viewBox="0 0 10 10">
+          <rect x="0" y="0" width="10" height="2" />
+          <rect x="0" y="4" width="10" height="2" />
+          <rect x="0" y="8" width="10" height="2" />
+        </svg>
+      </div>
+    </div>
+
     <script src="main.js"></script>
   </body>
 </html>
