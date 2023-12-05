@@ -47,6 +47,10 @@ function build_puzzle() {
   tile_coords = {};
   prev_tile_coords = {};
   tile_home = {};
+  tile_history = [];
+  resetting = false;
+  game_started = false;
+  game_ended = true;
   var pz_width = ( settings["width"] * settings["tile resolution"] ) + ( settings["gap"] * ( settings["width"] - 1 ) ) + (settings["gap"] * 2);
   var pz_height = ( settings["height"] * settings["tile resolution"] ) + ( settings["gap"] * ( settings["height"] - 1 ) ) + (settings["gap"] * 2);
   console.log("calculated width & height:", pz_width, pz_height);
@@ -284,6 +288,7 @@ function reset_puzzle() {
       clearInterval(hinterval);
       game_started = false;
       resetting = false;
+      tile_history = [];
     } else {
       move_tile(rhistory[0]);
       rhistory.splice(0, 1);
